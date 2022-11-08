@@ -17,13 +17,13 @@ namespace FWEB.Controllers
         [HttpPost]
         public IActionResult CalculateAreaOfTriangle([FromForm] AreaOfTriangleRequest request)
         {
-            return new JsonResult(request.Base * request.Height);
+            return new JsonResult((request.Base * request.Height)/2);
         }
 
         [HttpPost]
         public IActionResult CalculateAvg([FromBody] AvgRequest request)
         {
-            int sum = 0;
+            double sum = 0;
             for(int i = 0; i < request.input.Length;i++)
             {
                 sum = sum + request.input[i];
@@ -228,9 +228,10 @@ namespace FWEB.Controllers
         public IActionResult Substring(string input, int startIndex, int count)
         {
             string str = "";
-            for(int i = startIndex; i <= count; i++)
+            for(int i = 0; i < count; i++)
             {
-                str +=input[i];
+                str +=input[startIndex];
+                startIndex++;
             }
 
             return new JsonResult(str);
